@@ -260,7 +260,7 @@ const ProductDetails = () => {
   // ✅ Fetch single product
   const fetchProduct = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+      const res = await axios.get(`https://ecommerce1-tq6e.onrender.com/api/products/${id}`);
       setProduct(res.data);
     } catch (err) {
       console.error("❌ Failed to fetch product:", err);
@@ -272,7 +272,7 @@ const ProductDetails = () => {
     if (!user?._id) return;
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/wishlist/${user._id}`,
+        `https://ecommerce1-tq6e.onrender.com/api/wishlist/${user._id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -311,7 +311,7 @@ const ProductDetails = () => {
       };
 
       await axios.post(
-        "http://localhost:5000/api/cart/add-product",
+        "https://ecommerce1-tq6e.onrender.com/api/cart/add-product",
         payload,
         {
           headers: {
@@ -345,7 +345,7 @@ const ProductDetails = () => {
         productId: product._id,
       };
 
-      await axios.post("http://localhost:5000/api/wishlist/add", payload, {
+      await axios.post("https://ecommerce1-tq6e.onrender.com/api/wishlist/add", payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

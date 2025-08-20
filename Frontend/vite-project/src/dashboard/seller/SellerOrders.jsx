@@ -1,88 +1,4 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
 
-// const SellerOrders = () => {
-//   const [orders, setOrders] = useState([]);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchOrders = async () => {
-//       try {
-//         const token = localStorage.getItem("token");
-//         const user = JSON.parse(localStorage.getItem("user"));
-
-//         const res = await axios.get(
-//           `http://localhost:5000/api/orders/seller/${user._id}`,
-//           { headers: { Authorization: `Bearer ${token}` } }
-//         );
-
-//         setOrders(res.data);
-//       } catch (err) {
-//         console.error("❌ Error fetching seller orders:", err);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchOrders();
-//   }, []);
-
-//   if (loading) return <p className="p-4">Loading orders...</p>;
-
-//   return (
-//     <div className="p-4">
-//       <h2 className="text-2xl font-bold mb-4">📦 Customer Orders</h2>
-//       {orders.length === 0 ? (
-//         <p>No orders yet.</p>
-//       ) : (
-//         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//           {orders.map((order) => {
-//             const product = order.productId || {};
-//             const customer = order.customerId || {};
-//             const imageSrc = product.image?.startsWith("http")
-//               ? product.image
-//               : `http://localhost:5000/uploads/${product.image}`;
-
-//             return (
-//               <li key={order._id} className="border p-4 rounded shadow bg-white">
-//                 <div className="flex items-center gap-4">
-//                   {product.image ? (
-//                     <img
-//                       src={imageSrc}
-//                       alt={product.name}
-//                       className="w-20 h-20 object-cover rounded"
-//                       onError={(e) => (e.target.src = "/default.jpg")}
-//                     />
-//                   ) : (
-//                     <div className="w-20 h-20 bg-gray-200 flex items-center justify-center rounded text-gray-500">
-//                       No Image
-//                     </div>
-//                   )}
-
-//                   <div>
-//                     <p className="font-semibold text-lg">{product.name}</p>
-//                     <p><strong>Customer:</strong> {customer.name || "N/A"}</p>
-//                     <p><strong>Quantity:</strong> {order.quantity}</p>
-//                     <p><strong>Status:</strong> {order.status}</p>
-//                     <p className="text-sm text-gray-500">
-//                       Ordered on:{" "}
-//                       {new Date(order.createdAt).toLocaleString("en-IN", {
-//                         dateStyle: "medium",
-//                         timeStyle: "short",
-//                       })}
-//                     </p>
-//                   </div>
-//                 </div>
-//               </li>
-//             );
-//           })}
-//         </ul>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default SellerOrders;
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -98,7 +14,7 @@ const SellerOrders = () => {
         const user = JSON.parse(localStorage.getItem("user"));
 
         const res = await axios.get(
-          `http://localhost:5000/api/orders/seller/${user._id}`,
+          `https://ecommerce1-tq6e.onrender.com/api/orders/seller/${user._id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -132,7 +48,7 @@ const SellerOrders = () => {
               const customer = order.customerId || {};
               const imageSrc = product.image?.startsWith("http")
                 ? product.image
-                : `http://localhost:5000/uploads/${product.image}`;
+                : `https://ecommerce1-tq6e.onrender.com/uploads/${product.image}`;
 
               // Status color coding
               let statusColor = "bg-gray-300 text-gray-800";

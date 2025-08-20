@@ -12,7 +12,7 @@ const Orders = () => {
         const user = JSON.parse(localStorage.getItem("user"));
 
         const res = await axios.get(
-          `http://localhost:5000/api/orders/customer/${user._id}`,
+          `https://ecommerce1-tq6e.onrender.com/api/orders/customer/${user._id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -111,7 +111,7 @@ const Orders = () => {
                     const product = item.productId || {};
                     const imageSrc = product.image?.startsWith("http")
                       ? product.image
-                      : `http://localhost:5000/uploads/${product.image}`;
+                      : `https://ecommerce1-tq6e.onrender.com/uploads/${product.image}`;
 
                     return (
                       <div

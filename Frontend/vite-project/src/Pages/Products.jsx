@@ -15,8 +15,8 @@ const Products = () => {
     const fetchProducts = async () => {
       try {
         const url = category
-          ? `http://localhost:5000/api/products/getallproduct?category=${category}`
-          : `http://localhost:5000/api/products/getallproduct`;
+          ? `https://ecommerce1-tq6e.onrender.com/api/products/getallproduct?category=${category}`
+          : `https://ecommerce1-tq6e.onrender.com/api/products/getallproduct`;
 
         const res = await axios.get(url);
         setProducts(res.data);

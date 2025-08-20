@@ -21,7 +21,7 @@ const Home = () => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/products/getallproduct"
+          "https://ecommerce1-tq6e.onrender.com/api/products/getallproduct"
         );
         setProducts(res.data);
         setLoading(false);

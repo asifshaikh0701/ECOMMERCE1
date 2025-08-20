@@ -37,7 +37,7 @@ const Recommended = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products/getallproduct");
+        const res = await axios.get("https://ecommerce1-tq6e.onrender.com/api/products/getallproduct");
         setProducts(res.data);
 
         // Initialize quantities only if not already set
@@ -58,7 +58,7 @@ const Recommended = () => {
     const fetchWishlist = async () => {
       if (!user || !token) return;
       try {
-        const res = await axios.get("http://localhost:5000/api/wishlist", {
+        const res = await axios.get("https://ecommerce1-tq6e.onrender.com/api/wishlist", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setWishlist(res.data.products || []);
@@ -84,7 +84,7 @@ const Recommended = () => {
     if (!user || !token) return showToast("❌ Please login to add to cart.", "error");
     try {
       await axios.post(
-        "http://localhost:5000/api/cart/add-product",
+        "https://ecommerce1-tq6e.onrender.com/api/cart/add-product",
         { customerId: user._id, productId, quantity: quantities[productId] },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -122,7 +122,7 @@ const Recommended = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/orders/placeorder", orderData, {
+      await axios.post("https://ecommerce1-tq6e.onrender.com/api/orders/placeorder", orderData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -146,7 +146,7 @@ const Recommended = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/wishlist/add",
+        "https://ecommerce1-tq6e.onrender.com/api/wishlist/add",
         { customerId: user._id, productId },
         { headers: { Authorization: `Bearer ${token}` } }
       );

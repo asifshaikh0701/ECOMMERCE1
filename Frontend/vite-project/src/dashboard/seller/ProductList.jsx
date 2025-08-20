@@ -1,166 +1,4 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
 
-// const ProductList = () => {
-//   const [products, setProducts] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState("");
-//   const [editingId, setEditingId] = useState(null);
-//   const [form, setForm] = useState({
-//     name: "",
-//     description: "",
-//     price: "",
-//     stock: "",
-//     category: "",
-//     image: "",
-//   });
-//   const [message, setMessage] = useState("");
-
-//   const token = localStorage.getItem("token");
-
-//   const fetchSellerProducts = async () => {
-//     try {
-//       const res = await axios.get("http://localhost:5000/api/products/seller/products",  {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-
-//       setProducts(res.data);
-//     } catch (err) {
-//       setError("Failed to fetch seller's products.");
-//       console.error(err);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchSellerProducts();
-//   }, []);
-
-//   const handleEdit = (product) => {
-//     setForm({
-//       name: product.name,
-//       description: product.description,
-//       price: product.price,
-//       stock: product.stock,
-//       category: product.category,
-//       image: product.image,
-//     });
-//     setEditingId(product._id);
-//   };
-
-//   const handleDelete = async (id) => {
-//     if (!window.confirm("Are you sure you want to delete this product?")) return;
-
-//     try {
-//       await axios.delete(`http://localhost:5000/api/products/delete/${id}`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-//       setMessage("🗑 Product deleted successfully.");
-//       fetchSellerProducts();
-//     } catch (err) {
-//       console.error("Delete failed", err);
-//       setMessage("❌ Failed to delete product.");
-//     }
-//   };
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const dataToSend = {
-//         ...form,
-//         price: Number(form.price),
-//         stock: Number(form.stock),
-//       };
-
-//       await axios.put(`http://localhost:5000/api/products/update/${editingId}`, dataToSend, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-
-//       setMessage("✅ Product updated successfully.");
-//       setEditingId(null);
-//       setForm({
-//         name: "",
-//         description: "",
-//         price: "",
-//         stock: "",
-//         category: "",
-//         image: "",
-//       });
-//       fetchSellerProducts();
-//     } catch (err) {
-//       console.error("Update failed", err);
-//       setMessage("❌ Failed to update product. Check if you are the seller.");
-//     }
-//   };
-
-//   if (loading) return <p>Loading products...</p>;
-//   if (error) return <p className="text-red-500">{error}</p>;
-
-//   return (
-//     <div className="p-4 max-w-5xl mx-auto">
-//       <h2 className="text-2xl font-bold mb-4">📦 Your Products</h2>
-//       {message && <p className="text-green-600 mb-2">{message}</p>}
-
-//       {/* Edit Form */}
-//       {editingId && (
-//         <form onSubmit={handleSubmit} className="grid gap-3 bg-gray-50 p-4 rounded border mb-6">
-//           <h3 className="text-xl font-semibold">✏ Edit Product</h3>
-//           <input name="name" value={form.name} onChange={handleChange} placeholder="Name" className="border p-2" required />
-//           <input name="description" value={form.description} onChange={handleChange} placeholder="Description" className="border p-2" />
-//           <input name="price" type="number" value={form.price} onChange={handleChange} placeholder="Price" className="border p-2" required />
-//           <input name="stock" type="number" value={form.stock} onChange={handleChange} placeholder="Stock" className="border p-2" />
-//           <input name="category" value={form.category} onChange={handleChange} placeholder="Category" className="border p-2" required />
-//           <input name="image" value={form.image} onChange={handleChange} placeholder="Image URL" className="border p-2" />
-//           <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Update</button>
-//         </form>
-//       )}
-
-//       {/* Products Grid */}
-//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-//         {products.length === 0 ? (
-//           <p>No products added yet.</p>
-//         ) : (
-//           products.map((p) => (
-//             <div key={p._id} className="border p-4 rounded shadow relative">
-//               {p.image && (
-//                 <img
-//                   src={p.image}
-//                   alt={p.name}
-//                   className="w-full h-48 object-cover mb-2 rounded"
-//                 />
-//               )}
-//               <h3 className="font-semibold text-lg">🛒 {p.name}</h3>
-//               <p>{p.description}</p>
-//               <p className="text-green-600 font-bold">₹{p.price}</p>
-//               <p className="text-gray-600">📂 {p.category}</p>
-//               <p className="text-gray-600">Stock: {p.stock}</p>
-
-//               <div className="mt-3 flex space-x-2">
-//                 <button onClick={() => handleEdit(p)} className="bg-yellow-400 px-3 py-1 rounded text-sm">Edit</button>
-//                 <button onClick={() => handleDelete(p._id)} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Delete</button>
-//               </div>
-//             </div>
-//           ))
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ProductList;
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -184,7 +22,7 @@ const ProductList = () => {
 
   const fetchSellerProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/products/seller/products", {
+      const res = await axios.get("https://ecommerce1-tq6e.onrender.com/api/products/seller/products", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -219,7 +57,7 @@ const ProductList = () => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/products/delete/${id}`, {
+      await axios.delete(`https://ecommerce1-tq6e.onrender.com/api/products/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage("🗑 Product deleted successfully.");
@@ -236,7 +74,7 @@ const ProductList = () => {
     e.preventDefault();
     try {
       const dataToSend = { ...form, price: Number(form.price), stock: Number(form.stock) };
-      await axios.put(`http://localhost:5000/api/products/update/${editingId}`, dataToSend, {
+      await axios.put(`https://ecommerce1-tq6e.onrender.com/api/products/update/${editingId}`, dataToSend, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage("✅ Product updated successfully.");
